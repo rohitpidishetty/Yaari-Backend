@@ -1,0 +1,4 @@
+select *
+    from users
+    where user_name = ?
+    and user_password = ?;
