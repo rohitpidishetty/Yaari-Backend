@@ -4,6 +4,7 @@ import com.jud.yaari.Yaari.Backend.Code.DTO.LoginDTO;
 import com.jud.yaari.Yaari.Backend.Code.DTO.SignUpDTO;
 import com.jud.yaari.Yaari.Backend.Code.Service.AuthenticationService;
 import com.jud.yaari.Yaari.Backend.Code.Service.HomeFeedService;
+import com.jud.yaari.Yaari.Backend.Code.Service.HotSpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,6 +28,9 @@ public class MainController {
     private HomeFeedService homeFeedService;
 
     @Autowired
+    private HotSpotService hotSpotService;
+
+    @Autowired
     private JdbcTemplate jdbc;
 
     @PostMapping("/login")
@@ -46,5 +50,10 @@ public class MainController {
     @GetMapping("/home")
     public ResponseEntity<List<Map<String, Object>>> home(@RequestParam String username, @RequestParam long request_time) {
         return homeFeedService.populateFeed(username, request_time, jdbc);
+    }
+
+    @GetMapping("/hotspots")
+    public ResponseEntity<List<Map<String, Object>>> hotspots(@RequestParam double lon, @RequestParam double lat, @RequestParam int kilometer_range) {
+        return hotSpotService.fetch(lon, lat, kilometer_range, jdbc);
     }
 }
