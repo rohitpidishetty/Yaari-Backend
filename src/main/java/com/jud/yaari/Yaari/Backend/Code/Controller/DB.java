@@ -1,3 +1,4 @@
+// Testing code for making sure that end points work correctly
 package com.jud.yaari.Yaari.Backend.Code.Controller;
 
 import com.jud.yaari.Yaari.Backend.Code.DTO.MessageDTO;
