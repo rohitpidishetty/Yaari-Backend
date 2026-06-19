@@ -2,9 +2,7 @@ package com.jud.yaari.Yaari.Backend.Code.Controller;
 
 import com.jud.yaari.Yaari.Backend.Code.DTO.LoginDTO;
 import com.jud.yaari.Yaari.Backend.Code.DTO.SignUpDTO;
-import com.jud.yaari.Yaari.Backend.Code.Service.AuthenticationService;
-import com.jud.yaari.Yaari.Backend.Code.Service.HomeFeedService;
-import com.jud.yaari.Yaari.Backend.Code.Service.HotSpotService;
+import com.jud.yaari.Yaari.Backend.Code.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,6 +27,9 @@ public class MainController {
 
     @Autowired
     private HotSpotService hotSpotService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private JdbcTemplate jdbc;
@@ -56,4 +57,15 @@ public class MainController {
     public ResponseEntity<List<Map<String, Object>>> hotspots(@RequestParam double lon, @RequestParam double lat, @RequestParam int kilometer_range) {
         return hotSpotService.fetch(lon, lat, kilometer_range, jdbc);
     }
+
+    @GetMapping("/user_details")
+    public ResponseEntity<List<Map<String, Object>>> userDetails(@RequestParam String username) {
+        return userService.fetchDetails(username, jdbc);
+    }
+
+    @GetMapping("/user_own_feed")
+    public ResponseEntity<List<Map<String, Object>>> usersOwnFeed(@RequestParam String username, @RequestParam long request_time) {
+        return userService.fetchFeed(username, request_time, jdbc);
+    }
+
 }
