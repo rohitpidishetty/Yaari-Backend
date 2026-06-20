@@ -68,4 +68,9 @@ public class MainController {
         return userService.fetchFeed(username, request_time, jdbc);
     }
 
+    @GetMapping("/get_friends")
+    public ResponseEntity<List<Map<String, Object>>> getFriends(@RequestParam String username) {
+        return userService.getFriends(username, jdbc);
+    }
+
 }

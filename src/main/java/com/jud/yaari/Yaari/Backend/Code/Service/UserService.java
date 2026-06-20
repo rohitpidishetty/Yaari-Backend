@@ -31,4 +31,16 @@ public class UserService {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+    public ResponseEntity<List<Map<String, Object>>> getFriends(String username, JdbcTemplate jdbc) {
+        try {
+            List<Map<String, Object>> result = jdbc.queryForList(Files.readString(Paths.get("src/main/resources/sql/get_users_friends.sql")), username);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
+
 }
