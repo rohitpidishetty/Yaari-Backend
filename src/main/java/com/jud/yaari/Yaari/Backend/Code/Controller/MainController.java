@@ -1,6 +1,7 @@
 package com.jud.yaari.Yaari.Backend.Code.Controller;
 
 import com.jud.yaari.Yaari.Backend.Code.DTO.LoginDTO;
+import com.jud.yaari.Yaari.Backend.Code.DTO.MessageDTO;
 import com.jud.yaari.Yaari.Backend.Code.DTO.SignUpDTO;
 import com.jud.yaari.Yaari.Backend.Code.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MessagingService messagingService;
 
     @Autowired
     private JdbcTemplate jdbc;
@@ -71,6 +75,16 @@ public class MainController {
     @GetMapping("/get_friends")
     public ResponseEntity<List<Map<String, Object>>> getFriends(@RequestParam String username) {
         return userService.getFriends(username, jdbc);
+    }
+
+    @GetMapping("/message_pool")
+    public ResponseEntity<List<Map<String, Object>>> getMessagePool(@RequestParam String username) {
+        return messagingService.getMessagePool(username, jdbc);
+    }
+
+    @GetMapping("/chat_messages")
+    public ResponseEntity<List<MessageDTO>> getChatMessages(@RequestParam String username, @RequestParam String receiver) {
+        return messagingService.getChatMessages(username, receiver, jdbc);
     }
 
 }

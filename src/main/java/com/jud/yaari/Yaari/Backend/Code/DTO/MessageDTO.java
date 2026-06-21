@@ -1,6 +1,14 @@
 package com.jud.yaari.Yaari.Backend.Code.DTO;
 
 public class MessageDTO {
+    public MessageDTO(String message_id, String sender_username, String receiver_username, String text, String timestamp) {
+        this.message_id = message_id;
+        this.sender_username = sender_username;
+        this.receiver_username = receiver_username;
+        this.text = text;
+        this.timestamp = timestamp;
+    }
+
     public String getMessage_id() {
         return message_id;
     }
@@ -34,5 +42,15 @@ public class MessageDTO {
     }
 
     public String message_id, sender_username, receiver_username, text;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String timestamp;
 
 }
