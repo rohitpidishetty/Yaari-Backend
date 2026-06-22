@@ -35,11 +35,6 @@ public class DB {
         ), of);
     }
 
-    @RequestMapping("/comments")
-    public List<Map<String, Object>> comments(@RequestParam String post_id) throws Exception {
-        return jdbcTemplate.queryForList(Files.readString(Paths.get("src/main/resources/sql/comments.sql")
-        ), post_id);
-    }
 
     @RequestMapping("/messages")
     public List<Map<String, Object>> messages(@RequestParam String sender_username, @RequestParam String receiver_username) throws Exception {

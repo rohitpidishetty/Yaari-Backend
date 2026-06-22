@@ -1,14 +1,14 @@
 package com.jud.yaari.Yaari.Backend.Code.Controller;
 
-import com.jud.yaari.Yaari.Backend.Code.DTO.LoginDTO;
-import com.jud.yaari.Yaari.Backend.Code.DTO.MessageDTO;
-import com.jud.yaari.Yaari.Backend.Code.DTO.SignUpDTO;
+import com.jud.yaari.Yaari.Backend.Code.DTO.*;
 import com.jud.yaari.Yaari.Backend.Code.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +85,30 @@ public class MainController {
     @GetMapping("/chat_messages")
     public ResponseEntity<List<MessageDTO>> getChatMessages(@RequestParam String username, @RequestParam String receiver) {
         return messagingService.getChatMessages(username, receiver, jdbc);
+    }
+
+    @Autowired
+    private PostServices postServices;
+
+    @GetMapping("/like_post")
+    public void likePost(@RequestParam String postId, @RequestParam String likedByUsername) {
+        postServices.likePost(postId, likedByUsername, jdbc);
+    }
+
+    @GetMapping("/liked_by")
+    public ResponseEntity<List<LikedByUserDTO>> getLikedBy(@RequestParam String postId) {
+        return postServices.getUsersWhoLikedPost(postId, jdbc);
+    }
+
+    @GetMapping("/comments")
+    public ResponseEntity<List<CommentsDTO>> comments(@RequestParam String post_id) throws Exception {
+        return postServices.readComments(post_id, jdbc);
+
+    }
+
+    @PostMapping("/post_comment")
+    public int postComment(@RequestBody PostCommentDTO commentsPayload) {
+        return postServices.commentOnPost(commentsPayload.getCommentId(), commentsPayload.getPostId(), commentsPayload.getCommentBy(), commentsPayload.getComment(), jdbc);
     }
 
 }
