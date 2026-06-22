@@ -33,5 +33,18 @@ public class SignUpDTO {
         this.phone_number = phone_number;
     }
 
-    public String user_name, email_address, user_password, phone_number;
+    public String user_name;
+    public String email_address;
+    public String user_password;
+    public String phone_number;
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String fullname;
 }

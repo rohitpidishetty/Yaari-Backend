@@ -1,5 +1,6 @@
 package com.jud.yaari.Yaari.Backend.Code.Service;
 
+import com.jud.yaari.Yaari.Backend.Code.DTO.SearchUserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,5 +44,16 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
-
+    public ResponseEntity<List<SearchUserDTO>> searchUser(String searchToken, JdbcTemplate jdbc) {
+        try {
+            List<Map<String, Object>> result = jdbc.queryForList(Files.readString(Paths.get("src/main/resources/sql/search_users.sql")), searchToken + "%", searchToken + "%");
+            List<SearchUserDTO> searchResults = new ArrayList<>();
+            result.forEach(e -> {
+                searchResults.add(new SearchUserDTO(e.get("profile_picture").toString(), e.get("user_name").toString(), e.get("fullname").toString(), e.get("bio_status").toString()));
+            });
+            return ResponseEntity.ok(searchResults);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

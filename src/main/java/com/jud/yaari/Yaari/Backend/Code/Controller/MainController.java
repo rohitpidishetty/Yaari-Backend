@@ -111,4 +111,8 @@ public class MainController {
         return postServices.commentOnPost(commentsPayload.getCommentId(), commentsPayload.getPostId(), commentsPayload.getCommentBy(), commentsPayload.getComment(), jdbc);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<SearchUserDTO>> searchUser(@RequestParam String searchToken) {
+        return userService.searchUser(searchToken, jdbc);
+    }
 }
