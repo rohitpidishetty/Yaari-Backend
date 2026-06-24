@@ -61,7 +61,8 @@ public class AuthenticationService {
                     payload.getEmail_address(),
                     payload.getUser_password(),
                     LocalDate.now().toString(),
-                    payload.getPhone_number());
+                    payload.getPhone_number(),
+                    payload.getFullname());
         } catch (Exception err) {
 
             return false;

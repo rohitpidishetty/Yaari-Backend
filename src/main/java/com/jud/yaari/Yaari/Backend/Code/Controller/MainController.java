@@ -115,4 +115,11 @@ public class MainController {
     public ResponseEntity<List<SearchUserDTO>> searchUser(@RequestParam String searchToken) {
         return userService.searchUser(searchToken, jdbc);
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadPicture(@RequestBody PictureUploadDTO picture) {
+        return postServices.uploadPhoto(picture, jdbc);
+    }
 }
+
+
