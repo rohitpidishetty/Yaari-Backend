@@ -75,16 +75,7 @@ public class PostServices {
 
     public ResponseEntity<?> uploadPhoto(PictureUploadDTO picture, JdbcTemplate jdbc) {
         try {
-            List<Map<String, Object>> result = jdbc.queryForList(Files.readString(Paths.get("src/main/resources/sql/comments.sql")));
-            List<CommentsDTO> comments = new ArrayList<>();
-            result.forEach(e -> {
-                comments.add(new CommentsDTO(e.get("comment_id").toString(),
-                        e.get("post_id").toString(),
-                        e.get("comment_by").toString(),
-                        e.get("comment_data").toString(),
-                        e.get("comment_time").toString()));
-            });
-            return ResponseEntity.ok(comments);
+           
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
