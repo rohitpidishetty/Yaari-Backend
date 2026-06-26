@@ -68,16 +68,27 @@ public class PostServices {
             jdbc.update(Files.readString(Paths.get("src/main/resources/sql/post_comment.sql")), commentId, postId, commentBy, comment);
             return 1;
         } catch (Exception e) {
-            System.out.println(e);
+
             return 0;
         }
     }
 
     public ResponseEntity<?> uploadPhoto(PictureUploadDTO picture, JdbcTemplate jdbc) {
         try {
-           
+            jdbc.update(Files.readString(Paths.get("src/main/resources/sql/upload_picture.sql")),
+                    picture.getPostId(),
+                    picture.getPostDescription(),
+                    picture.getPostLink(),
+                    picture.getPostLocation(),
+                    picture.getPostDateOfUpload(),
+                    picture.getPostDayOfUpload(),
+                    picture.getPostMonthOfUpload(),
+                    picture.getPostYearOfUpload(),
+                    picture.getPostTimeOfUpload(),
+                    picture.getPostOwner());
+            return ResponseEntity.ok(true);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

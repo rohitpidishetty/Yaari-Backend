@@ -1,16 +1,41 @@
 package com.jud.yaari.Yaari.Backend.Code.DTO;
 
 public class PictureUploadDTO {
-    public PictureUploadDTO(String postId, String postDescription, String postLink, String postLocation, String postDateOfUpload,  String postMonthOfUpload, String postYearOfUpload, String postOwner, String postTimeOfUpload) {
+    public PictureUploadDTO(String postId,
+                            String postDescription,
+                            String postLink,
+                            String postLocation,
+                            int postDayOfUpload,
+                            int postDateOfUpload,
+                            int postMonthOfUpload,
+                            int postYearOfUpload,
+                            String postOwner,
+                            long postTimeOfUpload) {
         this.postId = postId;
         this.postDescription = postDescription;
         this.postLink = postLink;
         this.postLocation = postLocation;
         this.postDateOfUpload = postDateOfUpload;
+        this.postDayOfUpload = postDayOfUpload;
         this.postMonthOfUpload = postMonthOfUpload;
         this.postYearOfUpload = postYearOfUpload;
         this.postOwner = postOwner;
         this.postTimeOfUpload = postTimeOfUpload;
+    }
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\t\"postId\" : \"" + this.postId + "\",\n" +
+                "\t\"postDescription\" : \"" + this.postDescription + "\",\n" +
+                "\t\"postLink\" : \"" + this.postLink + "\",\n" +
+                "\t\"postLocation\" : \"" + this.postLocation + "\",\n" +
+                "\t\"postDateOfUpload\" : \"" + this.postDateOfUpload + "\",\n" +
+                "\t\"postDayOfUpload\" : \"" + this.postDayOfUpload + "\",\n" +
+                "\t\"postMonthOfUpload\" : \"" + this.postMonthOfUpload + "\",\n" +
+                "\t\"postYearOfUpload\" : \"" + this.postYearOfUpload + "\",\n" +
+                "\t\"postOwner\" : \"" + this.postOwner + "\",\n" +
+                "\t\"postTimeOfUpload\" : \"" + this.postTimeOfUpload + "\",\n}";
     }
 
     public String getPostId() {
@@ -45,27 +70,27 @@ public class PictureUploadDTO {
         this.postLocation = postLocation;
     }
 
-    public String getPostDateOfUpload() {
+    public int getPostDateOfUpload() {
         return postDateOfUpload;
     }
 
-    public void setPostDateOfUpload(String postDateOfUpload) {
+    public void setPostDateOfUpload(int postDateOfUpload) {
         this.postDateOfUpload = postDateOfUpload;
     }
 
-    public String getPostYearOfUpload() {
+    public int getPostYearOfUpload() {
         return postYearOfUpload;
     }
 
-    public void setPostYearOfUpload(String postYearOfUpload) {
+    public void setPostYearOfUpload(int postYearOfUpload) {
         this.postYearOfUpload = postYearOfUpload;
     }
 
-    public String getPostTimeOfUpload() {
+    public long getPostTimeOfUpload() {
         return postTimeOfUpload;
     }
 
-    public void setPostTimeOfUpload(String postTimeOfUpload) {
+    public void setPostTimeOfUpload(long postTimeOfUpload) {
         this.postTimeOfUpload = postTimeOfUpload;
     }
 
@@ -77,14 +102,32 @@ public class PictureUploadDTO {
         this.postOwner = postOwner;
     }
 
-    public String getPostMonthOfUpload() {
+    public int getPostMonthOfUpload() {
         return postMonthOfUpload;
     }
 
-    public void setPostMonthOfUpload(String postMonthOfUpload) {
+    public void setPostMonthOfUpload(int postMonthOfUpload) {
         this.postMonthOfUpload = postMonthOfUpload;
     }
 
-    public String postId, postDescription, postLink, postLocation, postDateOfUpload, postMonthOfUpload, postYearOfUpload, postTimeOfUpload, postOwner;
+    public String postId;
+    public String postDescription;
+    public String postLink;
+    public String postLocation;
+    public int postDateOfUpload;
+    public int postMonthOfUpload;
+
+    public int getPostDayOfUpload() {
+        return postDayOfUpload;
+    }
+
+    public void setPostDayOfUpload(int postDayOfUpload) {
+        this.postDayOfUpload = postDayOfUpload;
+    }
+
+    public int postDayOfUpload;
+    public int postYearOfUpload;
+    public long postTimeOfUpload;
+    public String postOwner;
 
 }
